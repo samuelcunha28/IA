@@ -10,7 +10,7 @@ import static java.awt.event.KeyEvent.*;
 import static java.awt.event.KeyEvent.VK_A;
 import static robocode.util.Utils.normalRelativeAngleDegrees;
 
-public class AssistedRobot extends robocode.Robot {
+public class HunterRobot extends robocode.Robot {
     String trackName; // Name of the robot we're currently tracking
     int count = 0; // Keeps track of how long we've
     // been searching for our target
@@ -18,12 +18,8 @@ public class AssistedRobot extends robocode.Robot {
 
     @Override
     public void run() {
-        setColors(Color.CYAN, Color.WHITE, Color.BLACK);
+        setColors(Color.BLACK, Color.BLACK, Color.BLACK);
         setBulletColor(Color.GREEN);
-        // Prepare gun
-        trackName = null; // Initialize to not tracking anyone
-        setAdjustGunForRobotTurn(true); // Keep the gun still when we turn
-        gunTurnAmt = 10; // Initialize gunTurn to 10
 
         // Loop forever
         while (true) {
@@ -78,7 +74,7 @@ public class AssistedRobot extends robocode.Robot {
         // Our target is close.
         gunTurnAmt = normalRelativeAngleDegrees(e.getBearing() + (getHeading() - getRadarHeading()));
         turnGunRight(gunTurnAmt);
-        // fire(3);
+        fire(3);
 
         // Our target is too close!  Back up.
         if (e.getDistance() < 100) {
@@ -113,5 +109,10 @@ public class AssistedRobot extends robocode.Robot {
     public void onBulletHit(BulletHitEvent event) {
         System.out.println("Atingi o" + event.getName() + " com uma potencia de: " + event.getBullet().getPower() + "\n" +
                 "A velocidade da bala foi de " + event.getBullet().getVelocity());
+    }
+
+    @Override
+    public void onWin(WinEvent event) {
+        System.out.println("Sou o melhor robot do mundo!");
     }
 }
