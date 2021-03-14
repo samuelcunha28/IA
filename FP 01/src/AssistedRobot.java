@@ -1,8 +1,12 @@
+import robocode.BulletHitEvent;
 import robocode.HitByBulletEvent;
 import robocode.ScannedRobotEvent;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 
+import static java.awt.event.KeyEvent.*;
+import static java.awt.event.KeyEvent.VK_A;
 import static robocode.util.Utils.normalRelativeAngleDegrees;
 
 public class AssistedRobot extends robocode.Robot {
@@ -60,7 +64,7 @@ public class AssistedRobot extends robocode.Robot {
         // This is our target.  Reset count (see the run method)
         count = 0;
         // If our target is too far away, turn and move toward it.
-        if (e.getDistance() > 150) {
+        if (e.getDistance() > 200) {
             gunTurnAmt = normalRelativeAngleDegrees(e.getBearing() + (getHeading() - getRadarHeading()));
 
             turnGunRight(gunTurnAmt); // Try changing these to setTurnGunRight,
@@ -73,7 +77,7 @@ public class AssistedRobot extends robocode.Robot {
         // Our target is close.
         gunTurnAmt = normalRelativeAngleDegrees(e.getBearing() + (getHeading() - getRadarHeading()));
         turnGunRight(gunTurnAmt);
-        fire(3);
+        //fire(3);
 
         // Our target is too close!  Back up.
         if (e.getDistance() < 100) {
@@ -84,5 +88,28 @@ public class AssistedRobot extends robocode.Robot {
             }
         }
         scan();
+    }
+    // Called when a key has been pressed
+    public void onKeyPressed(KeyEvent e) {
+        switch (e.getKeyCode()) {
+            case VK_1:
+                fire(1);
+                break;
+
+            case VK_2:
+                fire(2);
+                break;
+
+            case VK_3:
+                fire(3);
+                break;
+
+        }
+    }
+
+    @Override
+    public void onBulletHit(BulletHitEvent event) {
+        System.out.println("Atingi o" + event.getName() + " com uma potencia de: " + event.getBullet().getPower() + "\n" +
+                "A velocidade da bala foi de " + event.getBullet().getVelocity());
     }
 }
