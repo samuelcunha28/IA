@@ -57,3 +57,26 @@ vence2(pedra, tesoura).
 vence2(tesoura, lizard).
 vence2(tesoura, papel).
 
+%tipos pokemon%
+pokemon(bulbasaur, grass).
+pokemon(squirtle, water).
+pokemon(pidgeot, flying).
+pokemon(charizar, fire).
+
+%geracao pokemon%
+geracao(pikachu, 1).
+
+%bst total
+value(mewtwo, 680).
+
+
+%eficacia de tipos%
+tipo(water, fire).
+tipo(electric, flying).
+tipo(electric, water).
+%findall(X, tipo(electric, X), L)%
+tipo(poison, bug).
+tipo(flying, bug).
+tipo(rock, bug).
+tipo(fire, bug).
+%findall(X, tipo(X, bug), L)%
