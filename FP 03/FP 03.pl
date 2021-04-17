@@ -39,7 +39,6 @@ avo_materno(X,Y):-filho(Y,_,M),filho(M,X,_).
 %avô (homem ou mulher, materno ou paterno)
 avo(X,Y):-filho(Y,P,M),(filho(P,X,_);filho(P,_,X);
                        filho(M,X,_);filho(M,_,X)).
-
 %------------------------------------------Exercicio 2------------------------------------------------------------
 %homem(nome)
 homem('Stannis').
@@ -198,3 +197,8 @@ infiel(X):-(casados(X,Y);casados(Y,X)),
 %matoutar(X):-matou(X,Y),familia(Y,'Targaryen').
 %descendenteDir('Robert','Cersei',X)
 %descendenteDir(_,_,X).
+
+%FICHA 4
+descendenteQualquerGrau(X, Y):- filho(X, Y).
+descendenteQualquerGrau(X, Y):- filho(Z, Y), descendenteQualquerGrau(X, Z).
+%descendenteQualquerGrau("Aerys II", X)
